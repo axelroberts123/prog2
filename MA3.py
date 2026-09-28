@@ -12,7 +12,7 @@ import math as m
 import concurrent.futures as future
 from statistics import mean 
 from time import perf_counter as pc
-from numba import njit
+# from numba import njit
 
 # Exc1
 
@@ -67,22 +67,22 @@ def hypersphere_exact(d):
 
 
 
-@njit
-def sphere_volume_numba(n:int, d:int)->float:
-    #print('n:' + str(n) + ', Dimension(s):' + str(d))
+# @njit
+# def sphere_volume_numba(n:int, d:int)->float:
+#     #print('n:' + str(n) + ', Dimension(s):' + str(d))
 
-    coord=[]
-    for j in range(n):
-        point=[]
-        for i in range(d):
-            x=random.uniform(-1,1)
-            point.append(x)
-            #point.append((lambda x:x**2)(x))
-        distance=list(map(lambda x:x**2,point))
-        coord.append(distance)
-    in_or_out=[1 for sublist in coord if sum(sublist) <= 1]
-    volume = 2**d * len(in_or_out)/n
-    return volume
+#     coord=[]
+#     for j in range(n):
+#         point=[]
+#         for i in range(d):
+#             x=random.uniform(-1,1)
+#             point.append(x)
+#             #point.append((lambda x:x**2)(x))
+#         distance=list(map(lambda x:x**2,point))
+#         coord.append(distance)
+#     in_or_out=[1 for sublist in coord if sum(sublist) <= 1]
+#     volume = 2**d * len(in_or_out)/n
+#     return volume
 
 #Exc4: parallel code - parallelize actual computations by splitting data
 def sphere_volume_parallel(n, d, np=10):
@@ -115,25 +115,25 @@ def main():
     print(f"Actual volume of {d} dimentional sphere = {hypersphere_exact(d)}")
 
     #Exc3
-    n = 1000000
-    d = 11
-    start = pc()
-    sphere_volume(n, d)
-    stop = pc()
-    print(f"Exc3: Sequential time of {d} and {n}: {stop-start}")
-    print("What is numba time?")
-    start2=pc()
-    sphere_volume_numba(n,d)
-    stop2=pc()
-    print(stop2-start2)
-    start3=pc()
-    sphere_volume_numba(n,d)
-    stop3=pc()
-    print(stop3-start3)
-    start4=pc()
-    sphere_volume_numba(n,d)
-    stop4=pc()
-    print(stop4-start4)
+    # n = 1000000
+    # d = 11
+    # start = pc()
+    # sphere_volume(n, d)
+    # stop = pc()
+    # print(f"Exc3: Sequential time of {d} and {n}: {stop-start}")
+    # print("What is numba time?")
+    # start2=pc()
+    # sphere_volume_numba(n,d)
+    # stop2=pc()
+    # print(stop2-start2)
+    # start3=pc()
+    # sphere_volume_numba(n,d)
+    # stop3=pc()
+    # print(stop3-start3)
+    # start4=pc()
+    # sphere_volume_numba(n,d)
+    # stop4=pc()
+    # print(stop4-start4)
 
 
     #Exc3: Sequential time of 11 and 1000000: 5.387973125
