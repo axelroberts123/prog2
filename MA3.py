@@ -90,8 +90,8 @@ def sphere_volume_parallel(n, d, np=10):
     
     with future.ProcessPoolExecutor() as ex:
         results = ex.map(sphere_volume,n_split,np*[d])
-    total_inside=sum(results)
-    volume = 2**d * total_inside/n
+    results=list(results)
+    volume = sum(results)/np
     # n is the number of points
     # d is the number of dimensions of the sphere
     # np is the number of processes
@@ -114,26 +114,6 @@ def main():
     sphere_volume(n, d)
     print(f"Actual volume of {d} dimentional sphere = {hypersphere_exact(d)}")
 
-    #Exc3
-    # n = 1000000
-    # d = 11
-    # start = pc()
-    # sphere_volume(n, d)
-    # stop = pc()
-    # print(f"Exc3: Sequential time of {d} and {n}: {stop-start}")
-    # print("What is numba time?")
-    # start2=pc()
-    # sphere_volume_numba(n,d)
-    # stop2=pc()
-    # print(stop2-start2)
-    # start3=pc()
-    # sphere_volume_numba(n,d)
-    # stop3=pc()
-    # print(stop3-start3)
-    # start4=pc()
-    # sphere_volume_numba(n,d)
-    # stop4=pc()
-    # print(stop4-start4)
 
 
     #Exc3: Sequential time of 11 and 1000000: 5.387973125
